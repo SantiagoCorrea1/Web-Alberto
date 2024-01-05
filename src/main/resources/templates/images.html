@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html class="wide wow-animation"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <title>Home</title>
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/site/css/fontApi.css}">
+  <link rel="stylesheet"  th:href="@{/site/css/bootstrap.css}">
+  <link rel="stylesheet"  th:href="@{/site/css/fonts.css}">
+  <link rel="stylesheet"  th:href="@{/site/css/style.css}">
+  <link rel="stylesheet"  th:href="@{/site/css/plyr.css}">
+  <style>
+    *{
+      font-size: 18px;
+      color: #000000;
+    }
+    .container {
+      margin: 50px auto;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- Page Header-->
+  <header class="section page-header">
+    <div class="rd-navbar-wrap">
+      <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+        <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+        <div class="rd-navbar-aside-outer ">
+          <div class="rd-navbar-aside">
+            <!-- RD Navbar Panel-->
+            <div class="rd-navbar-panel">
+              <!-- RD Navbar Toggle-->
+              <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+              <div class="rd-navbar-brand">
+                <!--Brand--><a class="brand" style="font-size: 14px">Rosa Clara Montez Morales</a>
+              </div>
+              <!-- RD Navbar Brand-->
+            </div>
+          </div>
+        </div>
+        <div class="rd-navbar-main-outer">
+          <div class="rd-navbar-main">
+            <div class="rd-navbar-nav-wrap">
+              <!-- RD Navbar Nav-->
+              <ul class="rd-navbar-nav">
+                <li class="rd-nav-item active"><a class="rd-nav-link" th:href="@{/homePage}">Home</a>
+                </li>
+              </ul>
+              <ul class="rd-navbar-nav" style="align-content: end">
+                <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/login}">iniciar sesión</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+<!-- Javascript-->
+<script>
+  function logOut() {
+    document.getElementById("form-logout").submit()
+  }
+</script>
+<script th:src="@{/site/js/core.min.js}"></script>
+<script th:src="@{/site/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "webRosa",
+  "version": "1.0.0",
+  "dependencies": {
+    "plyr": "^3.7.8"
+  }
+}

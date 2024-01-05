@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html class="wide wow-animation"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Admin</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/site/css/fontApi.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/bootstrap.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/fonts.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/style.css}">
+</head>
+
+<body>
+<div class="preloader">
+    <div class="preloader-body">
+        <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+    </div>
+</div>
+<div class="page" >
+    <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+            <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                <div class="rd-navbar-aside-outer ">
+                    <div class="rd-navbar-aside">
+                        <!-- RD Navbar Panel-->
+                        <div class="rd-navbar-panel">
+                            <!-- RD Navbar Toggle-->
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand">
+                                <!--Brand--><a class="brand" style="font-size: 14px">Rosa Clara Montez Morales</a>
+                            </div>
+                            <!-- RD Navbar Brand-->
+                        </div>
+                    </div>
+                </div>
+                <div class="rd-navbar-main-outer">
+                    <div class="rd-navbar-main">
+                        <div class="rd-navbar-nav-wrap">
+                            <!-- RD Navbar Nav-->
+                            <ul class="rd-navbar-nav">
+                                <li class="rd-nav-item "><a class="rd-nav-link" th:href="@{/console}">Home</a>
+                                </li>
+                            </ul>
+                            <ul class="rd-navbar-nav" style="align-content: end">
+                                <li class="rd-nav-item active" > <a class="rd-nav-link" th:href="@{/console/edit}">Editar texto de página</a>
+                                </li>
+                                <li class="rd-nav-item"> <a class="rd-nav-link" th:href="@{/console/delete}">Eliminar imágenes</a>
+                                </li>
+                                <li class="rd-nav-item">  <a class="rd-nav-link" th:href="@{/console/settings}">configuración</a>
+                                </li>
+                                <li class="rd-nav-item" >
+                                    <form th:action="@{/logout}" method="post" style="display: none" id="form-logout">
+                                    </form>
+                                    <a class="rd-nav-link" th:attr="onclick=|logOut()|">Sign Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container" style="padding: 15px">
+        <form class="form-control" style="max-width: 70%; margin: 15px auto 0"  th:action="@{/console/edit}" th:method="POST" th:object="${pageText}" >
+            <div>
+                <h4 class="form-control">Texto de la Página</h4>
+            </div>
+            <div>
+                <div>
+                    <label class="form-control"><b>Título</b></label>
+                    <input class="form-control" type="text" th:field="*{title}" name="title">
+                </div>
+                <div>
+                    <label class="form-control"><b>Cuerpo</b></label>
+                    <textarea class="form-control" type="text" style="height: 200px" th:field="*{text}" name="text"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit" style="margin: 8px">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="snackbars" id="form-output-global"></div>
+
+<!-- Javascript-->
+<script>
+    function logOut() {
+        document.getElementById("form-logout").submit()
+    }
+</script>
+<script th:src="@{/site/js/core.min.js}"></script>
+<script th:src="@{/site/js/script.js}"></script>
+</body>
+</html>

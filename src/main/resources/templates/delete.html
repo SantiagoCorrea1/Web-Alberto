@@ -1,0 +1,130 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html class="wide wow-animation"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Admin</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/site/css/fontApi.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/bootstrap.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/fonts.css}">
+    <link rel="stylesheet"  th:href="@{/site/css/style.css}">
+</head>
+
+<body>
+<div class="preloader">
+    <div class="preloader-body">
+        <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+    </div>
+</div>
+<div class="page" style="overflow-x: auto">
+    <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+            <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="106px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                <div class="rd-navbar-aside-outer ">
+                    <div class="rd-navbar-aside">
+                        <!-- RD Navbar Panel-->
+                        <div class="rd-navbar-panel">
+                            <!-- RD Navbar Toggle-->
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand">
+                                <!--Brand--><a class="brand" style="font-size: 14px">Rosa Clara Montez Morales</a>
+                            </div>
+                            <!-- RD Navbar Brand-->
+                        </div>
+                    </div>
+                </div>
+                <div class="rd-navbar-main-outer">
+                    <div class="rd-navbar-main">
+                        <div class="rd-navbar-nav-wrap">
+                            <!-- RD Navbar Nav-->
+                            <ul class="rd-navbar-nav">
+                                <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/console}">Home</a>
+                                </li>
+                            </ul>
+                            <ul class="rd-navbar-nav" style="align-content: end">
+                                <li class="rd-nav-item"> <a class="rd-nav-link" th:href="@{/console/edit}">Editar texto de página</a>
+                                </li>
+                                <li class="rd-nav-item active"> <a class="rd-nav-link" th:href="@{/console/delete}">Eliminar imágenes</a>
+                                </li>
+                                <li class="rd-nav-item">  <a class="rd-nav-link" th:href="@{/console/settings}">configuración</a>
+                                </li>
+                                <li class="rd-nav-item" >
+                                    <form th:action="@{/logout}" method="post" style="display: none" id="form-logout">
+                                    </form>
+                                    <a class="rd-nav-link" th:attr="onclick=|logOut()|">Sign Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+<section>
+    <table class="table" style="max-width: 1000px; margin: 15px auto 0" >
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Autor</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Img</th>
+            <th scope="col">Accion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="publication : ${publications}">
+            <td th:text="${publication.getPublisherName()}"></td>
+            <td th:text="${publication.getPublicationDate()}"></td>
+            <td><img style="max-height: 220px; max-width: 150px" th:src="${publication.getUrlImage()}" alt="" width="270" height="195"/></td>
+            <td><button class="btn btn-primary" id="btn-delete" th:attr="onclick=|deleter('${publication.id}')|" >Eliminar</button></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+    <dialog id="warning">
+        <form style="max-width: 400px"
+              enctype="multipart/form-data">
+            <div class="form-group" style="align-content: center; margin: 15px">
+                <label>¿Estás seguro de que deseas eliminar la imágen?</label>
+            </div>
+            <div style="margin-bottom: 15px">
+                <a type="submit" class="button-primary" style="margin-right: 15px" th:href="@{/admin/delete/{id}(id=${publication.getId()})}">Eliminar</a>
+                <button id="btn-cancel-delete" type="reset" class="button-primary" style="background-color: #ff1d0b">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+<!-- Javascript-->
+<script th:src="@{/site/js/core.min.js}"></script>
+<script th:src="@{/site/js/script.js}"></script>
+<script>
+    //fetch
+    //axios
+    function deleter(id) {
+        if (confirm("¿estás seguro de que deseas eliminar este registro?")){
+            fetch("/console/delete/" + id)
+                .then(respond =>{
+                    location.reload()
+                })
+                .catch(error =>{
+                    alert("error al eliminar el registro")
+                })
+        }
+    }
+    function logOut() {
+        document.getElementById("form-logout").submit()
+    }
+
+</script>
+</body>
+</html>
